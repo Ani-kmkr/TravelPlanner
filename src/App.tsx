@@ -151,7 +151,7 @@ function App() {
           return;
         }
 
-        setCurrentTripId((current) => current ?? date[0].id);
+        setCurrentTripId(data[0].id);
       })
       .catch((err) => {
         console.error(err);
@@ -858,7 +858,7 @@ function App() {
                           color: "white",
                           fontSize: "12px",
                           textAlign: "center",
-                          userSelection: "none",
+                          userSelect: "none",
                         }}
                       >
                         View details
