@@ -34,6 +34,7 @@ venv/
 # Environment variables / secrets
 .env
 .env.*
+!.env.example
 
 # Python testing/cache
 .pytest_cache/

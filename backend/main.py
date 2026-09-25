@@ -1,5 +1,6 @@
 from datetime import date, time
 from typing import Optional
+import os
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -14,12 +15,15 @@ import psycopg
 app = FastAPI(title="Travel Planner API")
 
 
+CORS_ORIGINS = os.getenv(
+    "CORS_ORIGINS",
+    "http://localhost:5173,http://127.0.0.1:5173",
+).split(",")
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -30,8 +34,8 @@ app.add_middleware(
 # DATABASE
 # =========================================================
 
-DATABASE_URL = "dbname=travel_planner user=animesh"
-
+DATABASE_URL = os.getenv( "DATABASE_URL",
+    "dbname=travel_planner user=animesh",)
 
 def get_connection():
     return psycopg.connect(DATABASE_URL)
